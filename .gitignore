@@ -1,5 +1,7 @@
 *.res
 *.dfm
 *.tds
-*.~
+*.~cpp
+*.~h
+*.~dfm
 plan/
