@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 197
-  Top = 132
+  Left = 237
+  Top = 142
   Width = 870
   Height = 450
   BorderIcons = [biSystemMenu, biMinimize]
@@ -14,6 +14,8 @@ object Form1: TForm1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnKeyDown = FormKeyDown
+  OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
   object tlo: TShape
@@ -1484,30 +1486,36 @@ object Form1: TForm1
       9270BE9270BE9270BE9270BE9270BE9270BE9270BE9270BE9270BE927000}
   end
   object paddle1Up: TTimer
+    Enabled = False
     Interval = 15
+    OnTimer = paddle1UpTimer
     Left = 40
     Top = 16
   end
   object paddle1Down: TTimer
     Enabled = False
     Interval = 15
+    OnTimer = paddle1DownTimer
     Left = 40
     Top = 80
   end
   object paddle2Up: TTimer
     Enabled = False
     Interval = 15
+    OnTimer = paddle2UpTimer
     Left = 776
     Top = 40
   end
   object paddle2Down: TTimer
     Enabled = False
     Interval = 15
+    OnTimer = paddle2DownTimer
     Left = 776
     Top = 80
   end
   object ballMovement: TTimer
     Interval = 15
+    OnTimer = ballMovementTimer
     Left = 432
     Top = 40
   end
