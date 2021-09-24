@@ -27,32 +27,49 @@ void __fastcall TForm1::ballMovementTimer(TObject *Sender)
         if(ball->Top-5 <= tlo->Top) y = -y;
       //odbij od dolnej sciany
         if(ball->Top+ ball->Height >= tlo->Top+tlo->Height) y = -y;
-      //odbij od lewej sciany
-        if(ball->Left-5 <= tlo->Left)   x = -x;
-      //odbij od prawej sciany
-         if(ball->Left+ball->Width+5 >= tlo->Width) x = -x;
 
-
+      //przegrana
+        if(ball->Left <= paddle1->Left+paddle1->Width/2 &&
+           (ball->Top > paddle1->Top+paddle1->Height||
+            ball->Top+ball->Height < paddle1->Top))
+        {
+                ballMovement->Enabled = false;
+                ball->Visible = false;
+        }
+      //odbicie paddle1
+       else if(ball->Left <= paddle1->Left+paddle1->Width &&
+           ball->Top < paddle1->Top+paddle1->Height &&
+           ball->Top+ball->Height > paddle1->Top)
+        {
+                x = -x;
+        }
+     //odbicie paddle2
+        else if(ball->Left+ball->Width >= paddle2->Left &&
+           ball->Top < paddle2->Top+paddle2->Height &&
+           ball->Top+ball->Height > paddle2->Top)
+        {
+                x = -x;
+        }
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::paddle1UpTimer(TObject *Sender)
 {
-        if (paddle1->Top > tlo->Top-10) paddle1->Top -= 10;
+        if (paddle1->Top > tlo->Top+10) paddle1->Top -= 10;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::paddle1DownTimer(TObject *Sender)
 {
-        if (paddle1->Top+paddle1->Height < tlo->Top+tlo->Height+10) paddle1->Top +=10;
+        if (paddle1->Top+paddle1->Height < tlo->Top+tlo->Height-10) paddle1->Top +=10;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::paddle2UpTimer(TObject *Sender)
 {
-        if (paddle2->Top > tlo->Top-10) paddle2->Top -= 10;
+        if (paddle2->Top > tlo->Top+10) paddle2->Top -= 10;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::paddle2DownTimer(TObject *Sender)
 {
-        if (paddle2->Top+paddle2->Height  < tlo->Top+tlo->Height+10) paddle2->Top +=10;
+        if (paddle2->Top+paddle2->Height  < tlo->Top+tlo->Height-10) paddle2->Top +=10;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,

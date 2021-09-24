@@ -9,6 +9,7 @@
 #pragma resource "*.dfm"
 
 int x = -8, y = -8;
+bool gameOn = false;
 
 TForm1 *Form1;
 //---------------------------------------------------------------------------
@@ -28,10 +29,18 @@ void __fastcall TForm1::ballMovementTimer(TObject *Sender)
       //odbij od dolnej sciany
         if(ball->Top+ ball->Height >= tlo->Top+tlo->Height) y = -y;
 
-      //przegrana
+      //przegrana paddle1
         if(ball->Left <= paddle1->Left+paddle1->Width/2 &&
            (ball->Top > paddle1->Top+paddle1->Height||
             ball->Top+ball->Height < paddle1->Top))
+        {
+                ballMovement->Enabled = false;
+                ball->Visible = false;
+        }
+      //przegrana paddle2
+        else if(ball->Left+ball->Width >= paddle2->Left &&
+               (ball->Top > paddle2->Top+paddle2->Height||
+                ball->Top+ball->Height < paddle2->Top))
         {
                 ballMovement->Enabled = false;
                 ball->Visible = false;
@@ -90,3 +99,16 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
         if (Key == VK_DOWN) paddle2Down->Enabled = false;
 }
 //---------------------------------------------------------------------------
+
+
+void __fastcall TForm1::FormCreate(TObject *Sender)
+{
+        if(Application->MessageBox("Witaj w grze! Chcesz zagraæ?", "Gramy?",
+           MB_YESNO | MB_ICONQUESTION) == IDYES)
+           {
+                ballMovement->Enabled = true;
+                gameOn = true;
+           }
+}
+//---------------------------------------------------------------------------
+
