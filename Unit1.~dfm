@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 237
-  Top = 142
+  Left = 208
+  Top = 100
   Width = 870
   Height = 450
   BorderIcons = [biSystemMenu, biMinimize]
@@ -14,12 +14,13 @@ object Form1: TForm1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
   object tlo: TShape
-    Left = 0
+    Left = -8
     Top = 0
     Width = 857
     Height = 409
@@ -608,8 +609,8 @@ object Form1: TForm1
       9270BE9270BE9270BE9270BE9270BE9270BE9270BE9270BE9270BE927000}
   end
   object ball: TImage
-    Left = 400
-    Top = 256
+    Left = 280
+    Top = 112
     Width = 57
     Height = 53
     AutoSize = True
@@ -1485,35 +1486,66 @@ object Form1: TForm1
       70BE9270BE9270BE9270BE9270BE9270BE9270BE9270BE9270BE9270BE9270BE
       9270BE9270BE9270BE9270BE9270BE9270BE9270BE9270BE9270BE927000}
   end
+  object paddle1scoreTable: TLabel
+    Left = 24
+    Top = 56
+    Width = 43
+    Height = 51
+    Caption = 'p1'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clRed
+    Font.Height = -37
+    Font.Name = 'Comic Sans MS'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Transparent = True
+    Visible = False
+  end
+  object paddle2scoreTable: TLabel
+    Left = 768
+    Top = 56
+    Width = 43
+    Height = 51
+    Caption = 'p2'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clRed
+    Font.Height = -37
+    Font.Name = 'Comic Sans MS'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Transparent = True
+    Visible = False
+  end
   object paddle1Up: TTimer
     Enabled = False
     Interval = 15
     OnTimer = paddle1UpTimer
-    Left = 40
-    Top = 16
+    Left = 8
+    Top = 8
   end
   object paddle1Down: TTimer
     Enabled = False
     Interval = 15
     OnTimer = paddle1DownTimer
-    Left = 40
-    Top = 80
+    Left = 8
+    Top = 40
   end
   object paddle2Up: TTimer
     Enabled = False
     Interval = 15
     OnTimer = paddle2UpTimer
-    Left = 776
-    Top = 40
+    Left = 808
+    Top = 8
   end
   object paddle2Down: TTimer
     Enabled = False
     Interval = 15
     OnTimer = paddle2DownTimer
-    Left = 776
-    Top = 80
+    Left = 808
+    Top = 40
   end
   object ballMovement: TTimer
+    Enabled = False
     Interval = 15
     OnTimer = ballMovementTimer
     Left = 432
