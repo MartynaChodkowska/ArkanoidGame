@@ -22,6 +22,8 @@ __published:	// IDE-managed Components
         TTimer *paddle2Up;
         TTimer *paddle2Down;
         TTimer *ballMovement;
+        TLabel *paddle1scoreTable;
+        TLabel *paddle2scoreTable;
         void __fastcall ballMovementTimer(TObject *Sender);
         void __fastcall paddle1UpTimer(TObject *Sender);
         void __fastcall paddle1DownTimer(TObject *Sender);

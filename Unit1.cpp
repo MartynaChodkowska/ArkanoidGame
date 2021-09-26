@@ -10,6 +10,8 @@
 
 int x = -8, y = -8;
 bool gameOn = false;
+int paddle1score = 0, paddle2score = 0;
+
 
 TForm1 *Form1;
 //---------------------------------------------------------------------------
@@ -36,6 +38,18 @@ void __fastcall TForm1::ballMovementTimer(TObject *Sender)
         {
                 ballMovement->Enabled = false;
                 ball->Visible = false;
+                paddle2score++;
+                paddle1scoreTable->Caption = IntToStr(paddle1score);
+                paddle2scoreTable->Caption = IntToStr(paddle2score);
+                paddle1scoreTable->Visible = true;
+                paddle2scoreTable->Visible = true;
+                paddle2->Picture->LoadFromFile("img/winningPaddle.bmp");
+                paddle1Down->Enabled = false;
+                paddle1Up->Enabled = false;
+                paddle2Down->Enabled = false;
+                paddle2Up->Enabled = false;
+                //onKeyDown enabled false
+
         }
       //przegrana paddle2
         else if(ball->Left+ball->Width >= paddle2->Left &&
@@ -44,6 +58,17 @@ void __fastcall TForm1::ballMovementTimer(TObject *Sender)
         {
                 ballMovement->Enabled = false;
                 ball->Visible = false;
+                paddle1score++;
+                paddle1scoreTable->Caption = IntToStr(paddle1score);
+                paddle2scoreTable->Caption = IntToStr(paddle2score);
+                paddle1scoreTable->Visible = true;
+                paddle2scoreTable->Visible = true;
+                paddle1->Picture->LoadFromFile("img/winningPaddle.bmp");
+                paddle1Down->Enabled = false;
+                paddle1Up->Enabled = false;
+                paddle2Down->Enabled = false;
+                paddle2Up->Enabled = false;
+
         }
       //odbicie paddle1
        else if(ball->Left <= paddle1->Left+paddle1->Width &&
@@ -103,12 +128,17 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
-        if(Application->MessageBox("Witaj w grze! Chcesz zagraæ?", "Gramy?",
-           MB_YESNO | MB_ICONQUESTION) == IDYES)
+        if(Application->MessageBox("Witaj w grze!\n\nLewy gracz steruje wciskaj¹c klawisze A oraz Z.\nPrawy gracz - wciskaj¹c strza³ki do góry i w dó³.\n\nHave fun!", "Gramy?",
+           MB_OK | MB_ICONINFORMATION) == IDOK)
            {
+                paddle1scoreTable->Visible = false;
+                paddle2scoreTable->Visible = false;
                 ballMovement->Enabled = true;
                 gameOn = true;
+
            }
 }
 //---------------------------------------------------------------------------
+
+
 
