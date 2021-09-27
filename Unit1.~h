@@ -26,6 +26,8 @@ __published:	// IDE-managed Components
         TButton *onceAgain;
         TLabel *paddle2scoreTable;
         TLabel *paddle1scoreTable;
+        TLabel *bounceCount;
+        TImage *Image1;
         void __fastcall ballMovementTimer(TObject *Sender);
         void __fastcall paddle1UpTimer(TObject *Sender);
         void __fastcall paddle1DownTimer(TObject *Sender);
