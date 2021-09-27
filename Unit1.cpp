@@ -5,6 +5,9 @@
 #include "mmsystem.h"
 
 #include "Unit1.h"
+#include <jpeg.hpp>
+#include <memory>
+#include "Myres.rh"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -16,15 +19,18 @@ bool gameOn = false;
 int paddle1score = 0, paddle2score = 0;
 int bounceCounting = 0;
 
+
 void gameReset()
 {
         gameOn = true;
+        bounceCounting = 0;
         Form1->startGame->Visible = false;
         Form1->onceAgain->Visible = false;
+        Form1->bounceCount->Visible = true;
         Form1->paddle1scoreTable->Visible = false;
         Form1->paddle2scoreTable->Visible = false;
-        Form1->paddle1->Picture->LoadFromFile("img/paddle.bmp");
-        Form1->paddle2->Picture->LoadFromFile("img/paddle.bmp");
+        Form1->paddle1->Picture->Bitmap->LoadFromResourceName((int)HInstance, "PADDLE");;
+        Form1->paddle2->Picture->Bitmap->LoadFromResourceName((int)HInstance, "PADDLE");;
         Form1->paddle1->Top = 100;
         Form1->paddle2->Top = 100;
         Form1->ball->Left = 400;
@@ -37,17 +43,18 @@ void gameOver(int winningPaddle)
 {
                 Form1->ballMovement->Enabled = false;
                 Form1->ball->Visible = false;
+                bounceCounting = 0;
 
                 switch (winningPaddle)
                 {
                         case 1:
                         {
-                                Form1->paddle1->Picture->LoadFromFile("img/winningPaddle1.bmp");
+                                Form1->paddle1->Picture->Bitmap->LoadFromResourceName((int)HInstance, "WIN_PADDLE");
 
                         }break;
                         case 2:
                         {
-                                Form1->paddle2->Picture->LoadFromFile("img/winningPaddle1.bmp");
+                                Form1->paddle2->Picture->Bitmap->LoadFromResourceName((int)HInstance, "WIN_PADDLE");
                         }break;
                 }
                 Form1->paddle1scoreTable->Caption = IntToStr(paddle1score);
@@ -71,6 +78,8 @@ void __fastcall TForm1::ballMovementTimer(TObject *Sender)
 {
         ball->Left += x;
         ball->Top += y;
+
+        bounceCount->Caption = IntToStr(bounceCounting);
 
       //odbij od gornej sciany
         if(ball->Top-5 <= tlo->Top) y = -y;
@@ -109,6 +118,9 @@ void __fastcall TForm1::ballMovementTimer(TObject *Sender)
                 x = -x;
                 bounceCounting++;
         }
+
+
+
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::paddle1UpTimer(TObject *Sender)
@@ -159,6 +171,9 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
         if(Application->MessageBox("Witaj w grze!\nLewy gracz steruje wciskaj¹c klawisze A oraz Z.\nPrawy gracz - strza³ki do góry oraz w dó³.\n\n\ HaveFun!", "Gramy?",
            MB_OK | MB_ICONINFORMATION) == IDOK)
            {
+                ball->Picture->Bitmap->LoadFromResourceName((int)HInstance, "BALL");
+                paddle1->Picture->Bitmap->LoadFromResourceName((int)HInstance, "PADDLE");
+                paddle2->Picture->Bitmap->LoadFromResourceName((int)HInstance, "PADDLE");
                 startGame->Visible = true;
            }
 }
@@ -177,4 +192,5 @@ void __fastcall TForm1::onceAgainClick(TObject *Sender)
         gameReset();
 }
 //---------------------------------------------------------------------------
+
 

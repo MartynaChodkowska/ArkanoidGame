@@ -1,0 +1,5 @@
+#ifndef MYRES_RH
+#define MYRES_RH
+
+#define ID_JPEG 1000
+#endif
